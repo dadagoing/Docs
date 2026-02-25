@@ -1,7 +1,7 @@
 {
   "name": "个人知识库",
   "short_name": "知识库",
-  "start_url": "./",
+  "start_url": "https://dadagoing.github.io/Docs/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#42b983",
