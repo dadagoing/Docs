@@ -5,24 +5,21 @@
   <title>个人知识库 | 技术·生活·成长</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <!-- 保留你指定的绝对路径 -->
+  <!-- 保留绝对路径 -->
   <link rel="manifest" href="https://raw.githubusercontent.com/dadagoing/Docs/main/manifest.json">
-  <!-- 适配移动端/桌面端主题色 -->
   <meta name="theme-color" content="#42b983">
   <link rel="icon" href="/Docs/favicon.ico" type="image/x-icon">
   <link rel="shortcut icon" href="/Docs/favicon.ico" type="image/x-icon">
 
-  <!-- 核心样式（锁定版本） -->
+  <!-- 核心样式（锁定兼容版本） -->
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4.13.1/lib/themes/vue.css">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.css">
-
-  <!-- 新增：进度条样式 -->
+  <!-- 进度条样式（兼容版本） -->
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify-progress@1.0.3/dist/progress.min.css">
-  <!-- 新增：目录折叠样式 -->
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse@1.0.1/dist/sidebar-collapse.min.css">
+  <!-- 目录折叠样式（修复版本） -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse@0.1.7/dist/sidebar-collapse.min.css">
 
   <style>
-    /* 原有优化样式保留 */
     #app {
       position: fixed;
       width: 100%;
@@ -44,7 +41,7 @@
     .docsify-pagination-container { padding: 0 10px; }
     pre[class*="language-"] { border-radius: 8px; padding: 15px !important; }
 
-    /* 新增：回到顶部按钮样式 */
+    /* 回到顶部按钮 */
     .back-to-top {
       position: fixed;
       bottom: 20px;
@@ -65,7 +62,7 @@
     .back-to-top.show { opacity: 1; }
     [data-theme="dark"] .back-to-top { background: #61afef; }
 
-    /* 新增：复制代码成功提示样式 */
+    /* 复制代码成功提示 */
     .copy-code-success {
       background: #42b983 !important;
       color: white !important;
@@ -74,7 +71,7 @@
       border-radius: 4px !important;
     }
 
-    /* 新增：锚点导航样式优化 */
+    /* 锚点导航 */
     .anchor-link {
       opacity: 0;
       transition: opacity 0.2s;
@@ -96,12 +93,12 @@
   </div>
 </div>
 
-<!-- 新增：回到顶部按钮 -->
+<!-- 回到顶部按钮 -->
 <div class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</div>
 
 <script>
   window.$docsify = {
-    // 原有核心配置保留
+    // 核心配置保留
     name: '个人知识库',
     repo: 'https://github.com/dadagoing/Docs',
     loadSidebar: true,
@@ -114,7 +111,7 @@
     homepage: 'README.md',
     notFoundPage: '404.md',
 
-    // 原有优化配置保留
+    // 搜索功能
     search: {
       maxAge: 86400000,
       paths: 'auto',
@@ -124,18 +121,23 @@
       hideOtherSidebarContent: false,
       namespace: 'docsify-search'
     },
+
+    // 分页功能
     pagination: {
       previousText: '← 上一篇',
       nextText: '下一篇 →',
       crossChapter: true,
       crossChapterText: true
     },
+
+    // 暗黑模式（修复配置层级）
     darkmode: {
       enable: true,
       defaultTheme: 'light',
       autoDarkMode: 'auto',
       toggle: true
     },
+
     loadFailMessage: '😵 加载失败，请刷新页面重试',
     zoomImage: {
       margin: 10,
@@ -143,63 +145,53 @@
       zIndex: 99999
     },
 
-    // 新增功能1：代码行号显示
+    // 代码行号（原生配置，无需额外插件）
     lineNumbers: true,
-    // 新增功能2：目录自动折叠（默认折叠二级以上）
-    collapse: {
-      default: 1, // 0=全部展开，1=折叠二级及以上，2=折叠三级及以上
-      toggle: true // 显示折叠/展开按钮
+
+    // 目录折叠（修复：使用插件兼容的配置项）
+    sidebarCollapse: {
+      default: 1, // 0=展开，1=折叠二级
+      toggle: true
     },
-    // 新增功能3：锚点导航（标题自动生成锚点）
+
+    // 锚点导航（修复配置）
     anchorjs: {
       placement: 'right',
       visible: 'hover',
       icon: '#'
     },
-    // 新增功能4：自定义404页面文案
-    notFoundPage: {
-      '/': '_404.md',
-      '/zh-cn/': '_404.md'
-    },
-    // 新增功能5：图片懒加载
-    lazyLoad: {
-      enable: true,
-      delay: 300,
-      placeholder: 'https://cdn.jsdelivr.net/npm/docsify/lib/assets/loading.gif'
-    },
-    // 新增功能6：快捷键配置
+
+    // 图片懒加载（简化配置，避免未定义）
+    lazyLoad: true,
+
+    // 快捷键（简化配置）
     shortcuts: {
-      'toggleSidebar': 'alt+s', // 切换侧边栏
-      'toggleDarkMode': 'alt+d', // 切换暗黑模式
-      'search': 'alt+f' // 聚焦搜索框
+      'toggleSidebar': 'alt+s',
+      'toggleDarkMode': 'alt+d',
+      'search': 'alt+f'
     }
   }
 
-  // 新增：回到顶部按钮逻辑
+  // 回到顶部按钮逻辑
   window.addEventListener('scroll', () => {
     const backToTop = document.querySelector('.back-to-top');
-    if (window.scrollY > 300) {
-      backToTop.classList.add('show');
-    } else {
-      backToTop.classList.remove('show');
-    }
+    backToTop.classList.toggle('show', window.scrollY > 300);
   });
 
-  // 新增：复制代码成功提示
+  // 复制代码成功提示
   document.addEventListener('copy-code-success', (e) => {
-    const target = e.target;
     const tip = document.createElement('div');
     tip.className = 'copy-code-success';
     tip.textContent = '复制成功 ✅';
     tip.style.position = 'absolute';
     tip.style.top = '10px';
     tip.style.right = '10px';
-    target.appendChild(tip);
+    e.target.appendChild(tip);
     setTimeout(() => tip.remove(), 2000);
   });
 </script>
 
-<!-- 原有核心库保留 -->
+<!-- 核心库（锁定兼容版本） -->
 <script src="//cdn.jsdelivr.net/npm/docsify@4.13.1/lib/docsify.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/docsify@4.13.1/lib/plugins/emoji.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/docsify@4.13.1/lib/plugins/zoom-image.min.js"></script>
@@ -208,15 +200,13 @@
 <script src="//cdn.jsdelivr.net/npm/docsify-pagination@2.3.0/dist/docsify-pagination.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/docsify-darkmode@0.8.1/dist/docsify-darkmode.min.js"></script>
 
-<!-- 新增功能库 -->
-<script src="//cdn.jsdelivr.net/npm/docsify-progress@1.0.3/dist/progress.min.js"></script> <!-- 进度条 -->
-<script src="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse@1.0.1/dist/sidebar-collapse.min.js"></script> <!-- 目录折叠 -->
-<script src="//cdn.jsdelivr.net/npm/docsify-line-numbers@1.0.4/dist/docsify-line-numbers.min.js"></script> <!-- 代码行号 -->
-<script src="//cdn.jsdelivr.net/npm/docsify-anchorjs@1.1.2/dist/docsify-anchorjs.min.js"></script> <!-- 锚点导航 -->
-<script src="//cdn.jsdelivr.net/npm/docsify-lazyload@1.0.3/dist/docsify-lazyload.min.js"></script> <!-- 图片懒加载 -->
-<script src="//cdn.jsdelivr.net/npm/docsify-shortcuts@1.0.0/dist/docsify-shortcuts.min.js"></script> <!-- 快捷键 -->
+<!-- 插件（修复版本和引入顺序） -->
+<script src="//cdn.jsdelivr.net/npm/docsify-progress@1.0.3/dist/progress.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse@0.1.7/dist/sidebar-collapse.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/docsify-anchorjs@1.1.2/dist/docsify-anchorjs.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/docsify-lazyload@1.0.3/dist/docsify-lazyload.min.js"></script>
 
-<!-- 代码语法支持（原有+补充） -->
+<!-- 代码语法支持 -->
 <script src="//cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-java.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-python.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-javascript.min.js"></script>
@@ -233,11 +223,13 @@
 <script>
   if ('serviceWorker' in navigator && location.protocol === 'https:') {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/Docs/sw.js')
+      navigator.serviceWorker.register('https://raw.githubusercontent.com/dadagoing/Docs/main/sw.js')
               .then(registration => console.log('✅ Service Worker 注册成功：', registration.scope))
               .catch(error => console.log('❌ Service Worker 注册失败：', error));
     });
   }
+
+  // 加载完成隐藏提示
   document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
       const app = document.getElementById('app');
