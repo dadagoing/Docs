@@ -5,19 +5,17 @@
   <title>个人知识库 | 技术·生活·成长</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <!-- 保留绝对路径 -->
-  <link rel="manifest" href="https://raw.githubusercontent.com/dadagoing/Docs/main/manifest.json">
+  <link rel="manifest" href="/Docs/manifest.json">
   <meta name="theme-color" content="#42b983">
   <link rel="icon" href="/Docs/favicon.ico" type="image/x-icon">
   <link rel="shortcut icon" href="/Docs/favicon.ico" type="image/x-icon">
 
-  <!-- 核心样式（锁定兼容版本） -->
+  <!-- 核心样式 + 目录折叠样式（兼容版本） -->
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4.13.1/lib/themes/vue.css">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.css">
-  <!-- 进度条样式（兼容版本） -->
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify-progress@1.0.3/dist/progress.min.css">
-  <!-- 目录折叠样式（修复版本） -->
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse@0.1.7/dist/sidebar-collapse.min.css">
+  <!-- 目录折叠样式：使用最稳定的 0.1.0 版本 -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse@0.1.0/dist/sidebar-collapse.min.css">
 
   <style>
     #app {
@@ -31,13 +29,16 @@
       z-index: 9999;
       font-size: 18px;
       color: #42b983;
-      font-family: "Microsoft YaHei", sans-serif;
+      font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
     }
     [data-theme="dark"] #app {
       background: #1e1e1e;
       color: #61afef;
     }
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+      font-family: "Microsoft YaHei", "PingFang SC", sans-serif !important;
+    }
     .docsify-pagination-container { padding: 0 10px; }
     pre[class*="language-"] { border-radius: 8px; padding: 15px !important; }
 
@@ -82,6 +83,15 @@
       opacity: 1;
     }
     [data-theme="dark"] .anchor-link { color: #ccc; }
+
+    /* 目录折叠样式优化（兼容暗黑模式） */
+    .sidebar-nav .nav-item { margin: 2px 0; }
+    .sidebar-nav .nav-sub { padding-left: 15px; }
+    .sidebar-nav .nav-toggle {
+      cursor: pointer;
+      color: #42b983;
+    }
+    [data-theme="dark"] .sidebar-nav .nav-toggle { color: #61afef; }
   </style>
 </head>
 
@@ -98,7 +108,7 @@
 
 <script>
   window.$docsify = {
-    // 核心配置保留
+    // 核心基础配置
     name: '个人知识库',
     repo: 'https://github.com/dadagoing/Docs',
     loadSidebar: true,
@@ -130,7 +140,7 @@
       crossChapterText: true
     },
 
-    // 暗黑模式（修复配置层级）
+    // 暗黑模式
     darkmode: {
       enable: true,
       defaultTheme: 'light',
@@ -138,37 +148,17 @@
       toggle: true
     },
 
+    // 其他核心配置
     loadFailMessage: '😵 加载失败，请刷新页面重试',
-    zoomImage: {
-      margin: 10,
-      background: '#fff',
-      zIndex: 99999
-    },
-
-    // 代码行号（原生配置，无需额外插件）
+    zoomImage: { margin: 10, background: '#fff', zIndex: 99999 },
     lineNumbers: true,
-
-    // 目录折叠（修复：使用插件兼容的配置项）
-    sidebarCollapse: {
-      default: 1, // 0=展开，1=折叠二级
-      toggle: true
-    },
-
-    // 锚点导航（修复配置）
-    anchorjs: {
-      placement: 'right',
-      visible: 'hover',
-      icon: '#'
-    },
-
-    // 图片懒加载（简化配置，避免未定义）
     lazyLoad: true,
 
-    // 快捷键（简化配置）
-    shortcuts: {
-      'toggleSidebar': 'alt+s',
-      'toggleDarkMode': 'alt+d',
-      'search': 'alt+f'
+    // 目录折叠核心配置（原生+插件兼容）
+    sidebarCollapse: {
+      default: 1, // 0=全部展开，1=折叠二级及以上目录（推荐）
+      toggle: true, // 显示折叠/展开按钮
+      className: 'sidebar-collapse' // 修复：使用驼峰命名，避免class-name报错
     }
   }
 
@@ -191,45 +181,28 @@
   });
 </script>
 
-<!-- 核心库（锁定兼容版本） -->
+<!-- 核心库 -->
 <script src="//cdn.jsdelivr.net/npm/docsify@4.13.1/lib/docsify.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/docsify@4.13.1/lib/plugins/emoji.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/docsify@4.13.1/lib/plugins/zoom-image.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/docsify@4.13.1/lib/plugins/search.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/docsify-copy-code@2.1.1/dist/docsify-copy-code.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/docsify-pagination@2.3.0/dist/docsify-pagination.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/docsify-darkmode@0.8.1/dist/docsify-darkmode.min.js"></script>
-
-<!-- 插件（修复版本和引入顺序） -->
 <script src="//cdn.jsdelivr.net/npm/docsify-progress@1.0.3/dist/progress.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse@0.1.7/dist/sidebar-collapse.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/docsify-anchorjs@1.1.2/dist/docsify-anchorjs.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/docsify-lazyload@1.0.3/dist/docsify-lazyload.min.js"></script>
+
+<!-- 目录折叠插件（稳定兼容版本：0.1.0） -->
+<script src="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse@0.1.0/dist/sidebar-collapse.min.js"></script>
 
 <!-- 代码语法支持 -->
 <script src="//cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-java.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-python.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-javascript.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-typescript.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-sql.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-yaml.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-markdown.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-go.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-cpp.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-vue.min.js"></script>
 
-<!-- 原有Service Worker + 加载逻辑保留 -->
+<!-- 加载完成隐藏提示 -->
 <script>
-  if ('serviceWorker' in navigator && location.protocol === 'https:') {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('https://raw.githubusercontent.com/dadagoing/Docs/main/sw.js')
-              .then(registration => console.log('✅ Service Worker 注册成功：', registration.scope))
-              .catch(error => console.log('❌ Service Worker 注册失败：', error));
-    });
-  }
-
-  // 加载完成隐藏提示
   document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
       const app = document.getElementById('app');
