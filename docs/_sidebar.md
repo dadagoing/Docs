@@ -1,6 +1,15 @@
 - 🏠 首页
     - [关于本库](/README)
 
+- 📱 热梗百科 App
+    - [项目概览](/hotword-app/README)
+    - [产品规划](/hotword-app/product-planning.md)
+    - [技术架构](/hotword-app/architecture.md)
+    - [视觉设计](/hotword-app/visual-design.md)
+    - [交互设计](/hotword-app/interaction-design.md)
+    - [优化方案](/hotword-app/optimization-plan.md)
+    - [迭代路线](/hotword-app/iteration-roadmap.md)
+
 - 💻 技术通用
     - [后端知识](/tech/backend.md)
     - [数据库 & 缓存](/tech/db.md)
